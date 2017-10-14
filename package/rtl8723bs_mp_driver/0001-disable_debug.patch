@@ -1,0 +1,18 @@
+--- rtl8723bs_mp_driver-master/include/autoconf.h.old	2017-10-10 04:42:34.950519164 +0200
++++ rtl8723bs_mp_driver-master/include/autoconf.h	2017-10-10 04:43:01.680782628 +0200
+@@ -286,7 +286,7 @@
+ /*
+  * Debug Related Config
+  */
+-#define CONFIG_DEBUG
++//#define CONFIG_DEBUG
+ 
+ #ifdef CONFIG_DEBUG
+ #define DBG	1	// for ODM & BTCOEX debug
+@@ -303,4 +303,4 @@
+ #define DBG_CHECK_FW_PS_STATE
+ #define DBG_CHECK_FW_PS_STATE_H2C
+ //#define CONFIG_FW_C2H_DEBUG 
+-/* #define CONFIG_GPIO_API */
+\ No newline at end of file
++/* #define CONFIG_GPIO_API */
