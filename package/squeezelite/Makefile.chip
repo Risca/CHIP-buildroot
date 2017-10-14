@@ -1,0 +1,28 @@
+# Makefile Odroid C2
+#CFLAGS  += -DRESAMPLE -DFFMPEG -DVISEXPORT -DDSD -DLINKALL
+CFLAGS  += -DRESAMPLE -DFFMPEG -DVISEXPORT -DDSD
+#LDFLAGS ?= -static -lasound -lpthread -lFLAC -lmad -lfaad -lsoxr -lgomp -lavcodec -lmpg123 -lvorbisfile -lvorbis -logg -lavformat -lavcodec -lswresample -lavutil -lm -ldl -lrt -L/storage/dev/odroid/sysroot/usr/lib -pthread
+EXECUTABLE ?= squeezelite
+
+SOURCES = main.c slimproto.c utils.c buffer.c stream.c decode.c flac.c pcm.c mad.c vorbis.c output_alsa.c output.c output_pa.c output_pack.c output_stdout.c output_vis.c dop.c dsd.c dsd2pcm/dsd2pcm.c faad.c mpg.c resample.c process.c ffmpeg.c
+DEPS    = squeezelite.h slimproto.h dsd2pcm/dsd2pcm.h
+
+OBJECTS = $(SOURCES:.c=.o)
+
+.PHONY: all strip clean
+
+all: $(EXECUTABLE)
+
+strip: $(EXECUTABLE)
+	$(STRIP) -s $< -o $<-stripped
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+
+$(OBJECTS): $(DEPS)
+
+.c.o:
+	$(CC) $(CFLAGS) $< -c -o $@
+
+clean:
+	rm -f $(OBJECTS) $(EXECUTABLE)*

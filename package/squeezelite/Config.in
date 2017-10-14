@@ -1,0 +1,17 @@
+config BR2_PACKAGE_SQUEEZELITE
+	bool "squeezelite"
+	select BR2_PACKAGE_ALSA_LIB
+	select BR2_PACKAGE_FAAD2
+	select BR2_PACKAGE_FFMPEG
+	select BR2_PACKAGE_FLAC
+	select BR2_PACKAGE_LIBMAD
+	select BR2_PACKAGE_LIBOGG
+	select BR2_PACKAGE_LIBVORBIS
+	select BR2_PACKAGE_MPG123
+	select BR2_PACKAGE_LIBSOXR
+	help
+	  Squeezelite. Squeezelite is a headless (no user interface)
+	  software music player that allows you to play music streamed
+	  from Logitech Media Server.
+
+	  https://github.com/ralph-irving/squeezelite
