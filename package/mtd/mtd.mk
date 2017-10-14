@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-MTD_VERSION = 1.5.2
-MTD_SOURCE = mtd-utils-$(MTD_VERSION).tar.bz2
-MTD_SITE = ftp://ftp.infradead.org/pub/mtd-utils
+MTD_VERSION = f6a16e575091ef315b147532ba818877fd2c1895
+MTD_SITE = $(call github,NextThingCo,CHIP-mtd-utils,$(MTD_VERSION))
 MTD_LICENSE = GPLv2
 MTD_LICENSE_FILES = COPYING
 
