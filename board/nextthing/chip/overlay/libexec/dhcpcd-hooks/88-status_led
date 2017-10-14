@@ -1,0 +1,12 @@
+# Control status led based on IP connection
+
+case "$reason" in
+BOUND|BOUND6)
+	/etc/init.d/S01blink_led stop
+	;;
+
+STOP|STOP6)
+	/etc/init.d/S01blink_led start
+	;;
+esac
+

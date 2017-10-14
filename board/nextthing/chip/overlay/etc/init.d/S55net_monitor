@@ -1,0 +1,23 @@
+#!/bin/sh
+
+. /etc/wifi.conf
+
+case "$1" in
+	start)
+		net_monitor.sh &
+		;;
+	stop)
+		killall net_monitor.sh
+		dhcpcd -k $wlan
+		killall dhcpcd
+		killall wpa_supplicant
+		;;
+	restart)
+		$0 stop
+		sleep 1
+		$0 start
+		;;
+	*)
+		echo "usage: $0 {start|stop|restart}"
+		;;
+esac

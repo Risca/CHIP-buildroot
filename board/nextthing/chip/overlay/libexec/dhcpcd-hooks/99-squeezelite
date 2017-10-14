@@ -1,0 +1,11 @@
+# Start or stop squeezelite when bound
+
+case "$reason" in
+BOUND|BOUND6)
+	/usr/bin/squeezelite -s squeeze.dalakolonin.se -n "Nedre vardagsrum" -z
+	;;
+
+STOP|STOP6)
+	/usr/bin/killall squeezelite
+	;;
+esac

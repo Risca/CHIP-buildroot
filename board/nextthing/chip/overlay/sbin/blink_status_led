@@ -1,0 +1,12 @@
+#!/bin/sh
+
+v=0
+while [ 1 ]; do
+	i2cset -f -y 0 0x34 0x93 $v
+	if [ $v -eq 0 ]; then
+		v=1
+	else
+		v=0
+	fi
+	sleep 1
+done

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+case "$1" in
+	start)
+		killall blink_status_led
+		blink_status_led &
+		;;
+	stop)
+		killall blink_status_led
+		turn_on_status_led
+		;;
+	*)
+		echo "usage: $0 {start|stop}"
+		;;
+esac
