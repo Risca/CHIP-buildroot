@@ -162,6 +162,10 @@ define UBOOT_BUILD_CMDS
 			-o $(BR2_TARGET_UBOOT_FORMAT_NAND_OOB_SIZE)	\
 			-e $(BR2_TARGET_UBOOT_FORMAT_NAND_ERASE_SIZE)	\
 			nand $(@D)/u-boot.sb $(@D)/u-boot.nand)
+	$(NTC_CHIP_SPECIFIC_ENV) \
+	$(TARGET_CONFIGURE_OPTS) 	\
+		$(MAKE) -C $(@D) $(UBOOT_MAKE_OPTS) 		\
+		env
 endef
 
 define UBOOT_BUILD_OMAP_IFT
@@ -212,6 +216,12 @@ endef
 UBOOT_DEPENDENCIES += host-zynq-boot-bin
 UBOOT_POST_INSTALL_IMAGES_HOOKS += UBOOT_GENERATE_ZYNQ_IMAGE
 endif
+
+define UBOOT_INSTALL_FWPRINTENV
+	$(INSTALL) -m 0755 -D $(@D)/tools/env/fw_printenv $(TARGET_DIR)/usr/sbin/fw_printenv
+	ln -sf fw_printenv $(TARGET_DIR)/usr/sbin/fw_setenv
+endef
+UBOOT_POST_INSTALL_IMAGES_HOOKS += UBOOT_INSTALL_FWPRINTENV
 
 ifeq ($(BR2_TARGET_UBOOT_ENVIMAGE),y)
 ifeq ($(BR_BUILDING),y)
