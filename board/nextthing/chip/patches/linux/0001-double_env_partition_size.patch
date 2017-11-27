@@ -1,0 +1,17 @@
+--- ./arch/arm/boot/dts/sun5i-r8-chip.dts	2017-11-28 00:04:43.864687598 +0100
++++ ./arch/arm/boot/dts/sun5i-r8-chip.dts.new	2017-11-28 00:03:05.388408567 +0100
+@@ -218,12 +218,12 @@
+ 
+ 		env@c00000 {
+ 			label = "env";
+-			reg = /bits/ 64 <0xc00000 0x400000>;
++			reg = /bits/ 64 <0xc00000 0x800000>;
+ 		};
+ 
+ 		rootfs@1000000 {
+ 			label = "rootfs";
+-			reg = /bits/ 64 <0x1000000 0x1ff000000>;
++			reg = /bits/ 64 <0x1400000 0x1ff000000>;
+ 		};
+ 	};
+ };
