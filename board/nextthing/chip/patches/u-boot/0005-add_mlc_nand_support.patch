@@ -1,0 +1,47 @@
+--- uboot-production-mlc/tools/env/fw_env.c	2017-11-26 21:41:45.092714470 +0100
++++ uboot-production-mlc/tools/env/fw_env.c	2017-11-26 21:41:13.426048087 +0100
+@@ -706,7 +706,7 @@
+  */
+ static int flash_bad_block (int fd, uint8_t mtd_type, loff_t *blockstart)
+ {
+-	if (mtd_type == MTD_NANDFLASH) {
++	if (mtd_type == MTD_NANDFLASH || mtd_type == MTD_MLCNANDFLASH) {
+ 		int badblock = ioctl (fd, MEMGETBADBLOCK, blockstart);
+ 
+ 		if (badblock < 0) {
+@@ -750,7 +750,7 @@
+ 	/* Offset inside a block */
+ 	block_seek = offset - blockstart;
+ 
+-	if (mtd_type == MTD_NANDFLASH) {
++	if (mtd_type == MTD_NANDFLASH || mtd_type == MTD_MLCNANDFLASH) {
+ 		/*
+ 		 * NAND: calculate which blocks we are reading. We have
+ 		 * to read one block at a time to skip bad blocks.
+@@ -917,7 +917,7 @@
+ 		data = buf;
+ 	}
+ 
+-	if (mtd_type == MTD_NANDFLASH) {
++	if (mtd_type == MTD_NANDFLASH || mtd_type == MTD_MLCNANDFLASH) {
+ 		/*
+ 		 * NAND: calculate which blocks we are writing. We have
+ 		 * to write one block at a time to skip bad blocks.
+@@ -1104,6 +1104,7 @@
+ 		}
+ 		if (mtdinfo.type != MTD_NORFLASH &&
+ 		    mtdinfo.type != MTD_NANDFLASH &&
++		    mtdinfo.type != MTD_MLCNANDFLASH &&
+ 		    mtdinfo.type != MTD_DATAFLASH &&
+ 		    mtdinfo.type != MTD_UBIVOLUME) {
+ 			fprintf (stderr, "Unsupported flash type %u on %s\n",
+@@ -1293,6 +1294,9 @@
+ 		} else if (DEVTYPE(dev_current) == MTD_NANDFLASH &&
+ 			   DEVTYPE(!dev_current) == MTD_NANDFLASH) {
+ 			environment.flag_scheme = FLAG_INCREMENTAL;
++		} else if (DEVTYPE(dev_current) == MTD_MLCNANDFLASH &&
++			   DEVTYPE(!dev_current) == MTD_MLCNANDFLASH) {
++			environment.flag_scheme = FLAG_INCREMENTAL;
+ 		} else if (DEVTYPE(dev_current) == MTD_DATAFLASH &&
+ 			   DEVTYPE(!dev_current) == MTD_DATAFLASH) {
+ 			environment.flag_scheme = FLAG_BOOLEAN;
