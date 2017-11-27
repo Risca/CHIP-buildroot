@@ -20,3 +20,7 @@ The source code can be downloaded from:
 http://opensource.nextthing.co/chip/buildroot/${BRANCH}/${BUILD}/build${BUILD}.tar.gz
 
 EOF
+
+cat >> ${TARGET_DIR}/etc/fstab << EOF
+ubi0:data       /data           ubifs   defaults        0       0
+EOF
