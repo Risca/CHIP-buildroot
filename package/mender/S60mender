@@ -1,0 +1,24 @@
+#!/bin/sh
+
+case "$1" in
+	start)
+		if [ ! -d /data/mender ]; then
+			/bin/mkdir -p -m 0700 /data/mender
+		fi
+		if [ ! -f /var/lib/mender/authtentoken ]; then
+			/bin/ln -sf /etc/mender/tenant.conf /var/lib/mender/authtentoken
+		fi
+		/usr/bin/mender -no-syslog -daemon &
+		;;
+	stop)
+		killall mender
+		;;
+	restart)
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo "usage: $0 {start|stop|restart}"
+		;;
+esac
+
