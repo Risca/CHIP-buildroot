@@ -400,3 +400,4 @@ include package/pkg-generic.mk
 include package/pkg-kconfig.mk
 include package/pkg-rebar.mk
 include package/pkg-kernel-module.mk
+include package/pkg-golang.mk
