@@ -1473,6 +1473,7 @@ endif
 	source "package/kvmtool/Config.in"
 	source "package/lxc/Config.in"
 	source "package/mender/Config.in"
+	source "package/mender-grubenv/Config.in"
 	source "package/monit/Config.in"
 	source "package/ncdu/Config.in"
 	source "package/numactl/Config.in"
