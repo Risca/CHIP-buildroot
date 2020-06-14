@@ -21,7 +21,7 @@
 #
 ################################################################################
 
-GO_BIN = $(HOST_DIR)/bin/go
+GO_BIN = $(HOST_DIR)/usr/bin/go
 
 # We pass an empty GOBIN, otherwise "go install: cannot install
 # cross-compiled binaries when GOBIN is set"

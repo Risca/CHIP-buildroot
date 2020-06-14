@@ -13,7 +13,7 @@ GO_LICENSE_FILES = LICENSE
 
 HOST_GO_DEPENDENCIES = host-go-bootstrap
 HOST_GO_HOST_CACHE = $(HOST_DIR)/usr/share/host-go-cache
-HOST_GO_ROOT = $(HOST_DIR)/lib/go
+HOST_GO_ROOT = $(HOST_DIR)/usr/lib/go
 HOST_GO_TARGET_CACHE = $(HOST_DIR)/usr/share/go-cache
 
 ifeq ($(BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS),y)
