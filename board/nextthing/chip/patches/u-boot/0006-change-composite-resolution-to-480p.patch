@@ -1,0 +1,11 @@
+--- uboot-production-mlc/board/sunxi/dip.c	2020-06-14 21:08:37.856844326 +0200
++++ uboot-production-mlc/board/sunxi/dip.c	2020-06-14 21:10:56.254441737 +0200
+@@ -72,7 +72,7 @@
+ 		break;
+ 
+ 	default:
+-		env_var = "sunxi:720x480-24@60,monitor=composite-ntsc,overscan_x=40,overscan_y=20";
++		env_var = "sunxi:640x480-24@60,monitor=composite-ntsc,overscan_x=40,overscan_y=20";
+ 		break;
+ 	}
+ 
