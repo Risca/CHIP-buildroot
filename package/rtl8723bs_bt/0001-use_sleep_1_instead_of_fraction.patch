@@ -1,0 +1,14 @@
+--- rtl8723bs_bt-debian/bt_reset	2020-06-14 21:28:06.034307063 +0200
++++ rtl8723bs_bt-debian/bt_reset	2020-06-14 21:28:25.622532599 +0200
+@@ -34,9 +34,9 @@
+ # Toggle BT_RST_N to reset Bluetooth
+ {
+         echo 1 > /sys/class/gpio/gpio${BT_RST_N}/value;
+-        sleep 0.1;
++        sleep 1;
+         echo 0 > /sys/class/gpio/gpio${BT_RST_N}/value;
+-        sleep 0.1;
++        sleep 1;
+         echo 1 > /sys/class/gpio/gpio${BT_RST_N}/value;
+ } || failed "Failed to toggle Bluetooth reset" $?
+ 
