@@ -2,7 +2,7 @@
 
 case "$reason" in
 BOUND|BOUND6)
-	/usr/bin/squeezelite -s squeeze.dalakolonin.se -n "dummy" -z
+	/usr/bin/squeezelite -s squeeze.dalakolonin.se -n "CHIP-squeeze" -z
 	;;
 
 STOP|STOP6)
