@@ -1,0 +1,30 @@
+--- uboot-production-mlc/include/configs/sunxi-common.h	2020-06-14 21:01:25.359841377 +0200
++++ uboot-production-mlc/include/configs/sunxi-common.h	2020-06-14 21:07:14.807885123 +0200
+@@ -518,15 +518,9 @@
+ 	"stdin=serial\0"
+ #endif
+ 
+-#ifdef CONFIG_VIDEO
+-#define CONSOLE_STDOUT_SETTINGS \
+-	"stdout=serial,vga\0" \
+-	"stderr=serial,vga\0"
+-#else
+ #define CONSOLE_STDOUT_SETTINGS \
+ 	"stdout=serial\0" \
+ 	"stderr=serial\0"
+-#endif
+ 
+ #define CONSOLE_ENV_SETTINGS \
+ 	CONSOLE_STDIN_SETTINGS \
+@@ -544,6 +538,11 @@
+ 	"mtdids=nand0=sunxi-nand.0\0" \
+ 	"mtdparts=mtdparts=sunxi-nand.0:4m(spl),4m(spl-backup),4m(uboot),8m(env),-(UBI)\0" \
+ 	"bootargs=root=${mender_kernel_root_name} rootfstype=ubifs rw earlyprintk ubi.mtd=${mender_uboot_dev}\0" \
++	"splashpos=m,m\0" \
++	"fel_booted=0\0" \
++	"dip_addr_r=0x43400000\0" \
++	"dip_overlay_dir=/lib/firmware/nextthingco/chip/early\0" \
++	"dip_overlay_cmd 'if test -n \"${dip_overlay_name}\"; then ubifsload ${dip_addr_r} ${dip_overlay_dir}/${dip_overlay_name}; fi'\0" \
+ 	BOOTENV
+ 
+ #else /* ifndef CONFIG_SPL_BUILD */
