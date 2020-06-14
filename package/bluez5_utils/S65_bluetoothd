@@ -3,7 +3,7 @@
 case "$1" in
 	start)
 		echo -n "Starting bluetoothd"
-		start-stop-daemon -S -q -m -b -p /var/run/bluetoothd.pid --exec /usr/libexec/bluetooth/bluetoothd
+		start-stop-daemon -S -q -m -b -p /var/run/bluetoothd.pid -x /usr/libexec/bluetooth/bluetoothd
 		echo "done."
 		;;
 	stop)

@@ -7,7 +7,7 @@ case "$1" in
 		echo -n "Starting 8723 Bluetooth HCI ... "
 		/sbin/bt_reset
 		/sbin/modprobe hci_uart
-		start-stop-daemon -S -q -m -b -p /var/run/rtk_hciattach.pid --exec /sbin/rtk_hciattach -- -n -s 115200 $TTY_RTL8732BS rtk_h5 2>&1 | logger -t rtk_hciattach &
+		start-stop-daemon -S -q -m -b -p /var/run/rtk_hciattach.pid -x /sbin/rtk_hciattach -- -n -s 115200 $TTY_RTL8732BS rtk_h5 2>&1 | logger -t rtk_hciattach &
 		echo "done."
 		;;
 	stop)

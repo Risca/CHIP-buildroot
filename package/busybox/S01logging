@@ -5,8 +5,8 @@
 
 start() {
 	printf "Starting logging: "
-	start-stop-daemon -b -S -q -m -p /var/run/syslogd.pid --exec /sbin/syslogd -- -n
-	start-stop-daemon -b -S -q -m -p /var/run/klogd.pid --exec /sbin/klogd -- -n
+	start-stop-daemon -b -S -q -m -p /var/run/syslogd.pid -x /sbin/syslogd -- -n
+	start-stop-daemon -b -S -q -m -p /var/run/klogd.pid -x /sbin/klogd -- -n
 	echo "OK"
 }
 
