@@ -3,13 +3,13 @@
 @@ -0,0 +1,19 @@
 +/* Shell variables */
 +#define MENDER_BOOT_PART_NUMBER 0
-+#define MENDER_ROOTFS_PART_A_NUMBER 1
-+#define MENDER_ROOTFS_PART_B_NUMBER 2
++#define MENDER_ROOTFS_PART_A_NUMBER 0
++#define MENDER_ROOTFS_PART_B_NUMBER 1
 +#define MENDER_UBOOT_STORAGE_INTERFACE "ubi"
 +#define MENDER_UBOOT_STORAGE_DEVICE 4
 +
 +/* BB variables. */
-+#define MENDER_STORAGE_DEVICE_BASE "/dev/mtd"
++#define MENDER_STORAGE_DEVICE_BASE "ubi0_"
 +
 +/* For sanity checks. */
 +#define MENDER_BOOTENV_SIZE 0x400000
@@ -22,6 +22,26 @@
 +
 --- uboot-production-mlc/include/configs/sun5i.h	2017-11-25 18:35:49.552882034 +0100
 +++ uboot-production-mlc/include/configs/sun5i.h	2017-11-26 01:33:54.576554049 +0100
+@@ -19,6 +19,19 @@
+ 
+ #define CONFIG_SUNXI_USB_PHYS	2
+ 
++#define CONFIG_BOOTCOMMAND \
++	"if test -n ${fel_booted} && test -n ${scriptaddr}; then " \
++		"echo '(FEL BOOT)';" \
++		"source ${scriptaddr};" \
++	"fi;" \
++	"run mender_setup;" \
++	"mtdparts;" \
++	"ubi part ${mender_mtd_ubi_dev_name};" \
++	"ubifsmount ${mender_uboot_root_name};" \
++	"ubifsload ${fdt_addr_r} /boot/sun5i-r8-chip.dtb;" \
++	"ubifsload ${kernel_addr_r} /boot/zImage;" \
++	"bootz ${kernel_addr_r} - ${fdt_addr_r};"
++
+ /*
+  * Include common sunxi configuration where most the settings are
+  */
 @@ -26,4 +26,11 @@
  
  #define CONFIG_MACH_TYPE	(4138 | ((CONFIG_MACH_TYPE_COMPAT_REV) << 28))
@@ -34,3 +54,15 @@
 +#undef CONFIG_ENV_OFFSET
 +
  #endif /* __CONFIG_H */
+--- uboot-production-mlc/include/configs/sunxi-common.h	2020-06-14 00:17:36.354769621 +0200
++++ uboot-production-mlc/include/configs/sunxi-common.h	2020-06-14 00:41:46.079536261 +0200
+@@ -542,7 +542,8 @@
+ 	BOOTCMD_SUNXI_COMPAT \
+ 	"usbnet_devaddr=de:ad:be:af:00:01\0" \
+ 	"mtdids=nand0=sunxi-nand.0\0" \
+-	"mtdparts=mtdparts=sunxi-nand.0:4m(spl),4m(spl-backup),4m(uboot),4m(env),-(UBI)\0" \
++	"mtdparts=mtdparts=sunxi-nand.0:4m(spl),4m(spl-backup),4m(uboot),8m(env),-(UBI)\0" \
++	"bootargs=root=${mender_kernel_root_name} rootfstype=ubifs rw earlyprintk ubi.mtd=${mender_uboot_dev}\0" \
+ 	BOOTENV
+ 
+ #else /* ifndef CONFIG_SPL_BUILD */
