@@ -6,7 +6,7 @@ case "$1" in
 			/bin/mkdir -p -m 0700 /data/mender
 		fi
 		if [ ! -f /data/mender/device_type ]; then
-			echo "device_type=chip" > /data/mender/device_type
+			cp /etc/mender/device_type /data/mender/device_type
 		fi
 		;;
 	*)
